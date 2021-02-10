@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getCategories, createaProduct } from "./helper/adminapicall";
 import { isAutheticated } from "../auth/helper/index";
 
 const AddProduct = () => {
   const { user, token } = isAutheticated();
-  // let history = useHistory();
 
   const [values, setValues] = useState({
     name: "",
@@ -66,21 +65,12 @@ const AddProduct = () => {
           price: "",
           photo: "",
           stock: "",
-          // getaredirect: true,
           loading: false,
           createdProduct: data.name
         });
       }
     });
   };
-
-  // const performRedirect = () =>{
-  //   if(getaRedirect){
-  //     setTimeout(()=>{
-  //       history.push('/admin/dashboard')
-  //     },3000)
-  //   }
-  // }
 
   const handleChange = name => event => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
@@ -96,12 +86,6 @@ const AddProduct = () => {
       <h4>{createdProduct} created successfully</h4>
     </div>
   );
-
-  const warningMessage = () => {
-    if (error) {
-      return <h4 className="text-danger">Failed to create product</h4>;
-    }
-  };
 
   const createProductForm = () => (
     <form>
@@ -190,10 +174,8 @@ const AddProduct = () => {
       </Link>
       <div className="row bg-dark text-white rounded">
         <div className="col-md-8 offset-md-2">
-          {warningMessage()}
           {successMessage()}
           {createProductForm()}
-          {/* {performRedirect()} */}
         </div>
       </div>
     </Base>
